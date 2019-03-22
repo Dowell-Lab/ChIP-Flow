@@ -8,7 +8,7 @@ For internal Dowell Lab use.
 
 Clone this repository in your home directory:
 
-    $ git clone git@biof-git.colorado.edu:dowelllab/GRO-seq-workflow.git
+    $ git clone https://github.com/Dowell-Lab/ChIP-Flow.git
 
 Install Nextflow:
 
