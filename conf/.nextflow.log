@@ -1,0 +1,240 @@
+Feb-20 13:06:52.157 [main] DEBUG nextflow.cli.Launcher - $> /Users/magr0763/nextflow run /Users/magr0763/Nascent-Flow/main.nf -profile slurm --fastqs /scratch/Shares/dowell/pubgro/Liu2014/*fastq--workdir /scratch/Shares/dowell/NascentDB/processed/Liu2014/temp --email margaret.gruca@colorado.edu --outdir /scratch/Shares/dowell/NascentDB/processed/Liu2014 --singleEnd --noBAM --prelimtfit --tfit --fstitch
+Feb-20 13:06:52.318 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 0.31.0
+Feb-20 13:06:52.348 [main] INFO  nextflow.cli.CmdRun - Launching `/Users/magr0763/Nascent-Flow/main.nf` [mighty_lichterman] - revision: 1b465198ef
+Feb-20 13:06:52.374 [main] DEBUG nextflow.config.ConfigBuilder - Found config base: /Users/magr0763/Nascent-Flow/nextflow.config
+Feb-20 13:06:52.376 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /Users/magr0763/Nascent-Flow/nextflow.config
+Feb-20 13:06:52.415 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `slurm`
+Feb-20 13:06:52.983 [main] DEBUG nextflow.config.ConfigBuilder - Available config profiles: [standard, slurm, minimal, test, paper, slurm_grch38, conda, batch, singularity, none, aws, docker]
+Feb-20 13:06:53.019 [main] DEBUG nextflow.Session - Session uuid: 9f6016f6-22e9-445c-9077-54d1134c2bce
+Feb-20 13:06:53.019 [main] DEBUG nextflow.Session - Run name: mighty_lichterman
+Feb-20 13:06:53.020 [main] DEBUG nextflow.Session - Executor pool size: 64
+Feb-20 13:06:53.035 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 0.31.0 build 4885
+  Modified: 25-07-2018 14:10 UTC (08:10 MDT)
+  System: Linux 3.10.0-862.14.4.el7.x86_64
+  Runtime: Groovy 2.4.15 on OpenJDK 64-Bit Server VM 1.8.0_131-b12
+  Encoding: UTF-8 (UTF-8)
+  Process: 16904@fijinode-05 [10.224.32.25]
+  CPUs: 64 - Mem: 503.7 GB (447.3 GB) - Swap: 32 GB (32 GB)
+Feb-20 13:06:53.071 [main] DEBUG nextflow.Session - Work-dir: /Users/magr0763/ChIP-seq_NF_Workflow/conf/work [nfs]
+Feb-20 13:06:53.608 [main] DEBUG nextflow.Session - Session start invoked
+Feb-20 13:06:53.613 [main] DEBUG nextflow.processor.TaskDispatcher - Dispatcher > start
+Feb-20 13:06:53.614 [main] DEBUG nextflow.trace.TraceFileObserver - Flow starting -- trace file: /scratch/Shares/dowell/NascentDB/processed/Liu2014/pipeline_info/nascent_pipeline_trace.txt
+Feb-20 13:06:53.644 [main] DEBUG nextflow.script.ScriptRunner - > Script parsing
+Feb-20 13:06:54.409 [main] WARN  nextflow.Session - The config file defines settings for an unknown process: fastqc -- Did you mean: fastQC?
+Feb-20 13:06:54.412 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Feb-20 13:06:54.436 [main] WARN  nextflow.script.ScriptBinding - Access to undefined parameter `MOTIF_PATH` -- Initialise it to a default value eg. `params.MOTIF_PATH = some_value`
+Feb-20 13:06:54.463 [main] DEBUG nextflow.file.PathVisitor - files for syntax: glob; folder: /scratch/Shares/dowell/pubgro/Liu2014/; pattern: *fastq--workdir; options: [:]
+Feb-20 13:06:54.549 [main] DEBUG nextflow.file.PathVisitor - files for syntax: glob; folder: /scratch/Shares/dowell/pubgro/Liu2014/; pattern: *fastq--workdir; options: [:]
+Feb-20 13:06:54.551 [main] DEBUG nextflow.file.PathVisitor - files for syntax: glob; folder: /scratch/Shares/dowell/pubgro/Liu2014/; pattern: *fastq--workdir; options: [:]
+Feb-20 13:06:54.556 [main] INFO  nextflow.Nextflow - =======================================================
+NascentFlow v1.1"
+=======================================================
+Feb-20 13:06:54.558 [main] WARN  nextflow.script.ScriptBinding - Access to undefined parameter `mpi` -- Initialise it to a default value eg. `params.mpi = some_value`
+Feb-20 13:06:54.565 [main] INFO  nextflow.Nextflow - Pipeline Name  : NascentFlow
+Help Message   : false
+Pipeline Version: 1.1
+Run Name       : mighty_lichterman
+Reads          : data/*{R1,R2}*.fastq
+Fastqs         : /scratch/Shares/dowell/pubgro/Liu2014/*fastq--workdir
+Genome Ref     : /scratch/Shares/dowell/nascent/hg38/hg38.fa
+Thread fqdump  : NO
+Data Type      : Single-End
+Save All fastq : NO
+Save BAM       : YES
+Save fastq     : NO
+Save Trimmed   : NO
+Reverse Comp   : NO
+Run RSeQC      : YES
+Run MultiQC    : YES
+Max Memory     : 20 GB
+Max CPUs       : 1
+Max Time       : 2d
+Output dir     : /scratch/Shares/dowell/NascentDB/processed/Liu2014
+FStitch        : true
+Prelim Tfit    : true
+Tfit           : true
+DAStk          : false
+FStitch dir    : /scratch/Shares/dowell/FStitch/src/FStitch
+FStitch train  : /scratch/Shares/dowell/FStitch/train/hg38_train.bed
+Tfit dir       : /scratch/Shares/dowell/Tfit/src/Tfit
+Working dir    : /Users/magr0763/ChIP-seq_NF_Workflow/conf/work
+Container Engine: null
+Current home   : /Users/magr0763
+Current user   : magr0763
+Current path   : /Users/magr0763/ChIP-seq_NF_Workflow/conf
+Script dir     : /Users/magr0763/Nascent-Flow
+Config Profile : slurm
+E-mail Address : margaret.gruca@colorado.edu
+Feb-20 13:06:54.565 [main] INFO  nextflow.Nextflow - =======================================================
+Feb-20 13:06:54.684 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:54.685 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:54.710 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:54.713 [main] INFO  nextflow.executor.Executor - [warm up] executor > slurm
+Feb-20 13:06:54.725 [main] DEBUG n.processor.TaskPollingMonitor - Creating task monitor for executor 'slurm' > capacity: 100; pollInterval: 5s; dumpInterval: 5m 
+Feb-20 13:06:54.730 [main] DEBUG nextflow.processor.TaskDispatcher - Starting monitor: TaskPollingMonitor
+Feb-20 13:06:54.731 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: slurm)
+Feb-20 13:06:54.735 [main] DEBUG nextflow.executor.Executor - Invoke register for executor: slurm
+Feb-20 13:06:54.735 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:54.777 [main] DEBUG nextflow.Session - >>> barrier register (process: get_software_versions)
+Feb-20 13:06:54.781 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > get_software_versions -- maxForks: 64
+Feb-20 13:06:54.843 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:54.843 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:54.844 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:54.844 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:54.846 [main] DEBUG nextflow.Session - >>> barrier register (process: sra_dump)
+Feb-20 13:06:54.846 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > sra_dump -- maxForks: 64
+Feb-20 13:06:54.859 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: sra_dump)
+Feb-20 13:06:54.877 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:54.878 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:54.878 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:54.879 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:54.880 [main] DEBUG nextflow.Session - >>> barrier register (process: fastQC)
+Feb-20 13:06:54.880 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > fastQC -- maxForks: 64
+Feb-20 13:06:54.884 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: fastQC)
+Feb-20 13:06:54.895 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:54.895 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:54.895 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:54.895 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:54.897 [main] DEBUG nextflow.Session - >>> barrier register (process: gzip_fastq)
+Feb-20 13:06:54.897 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > gzip_fastq -- maxForks: 64
+Feb-20 13:06:54.902 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: gzip_fastq)
+Feb-20 13:06:54.908 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:54.908 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:54.908 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:54.909 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:54.911 [main] DEBUG nextflow.Session - >>> barrier register (process: bbduk)
+Feb-20 13:06:54.911 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > bbduk -- maxForks: 64
+Feb-20 13:06:54.912 [Actor Thread 3] DEBUG nextflow.util.CacheHelper - [WARN] Unknown hashing type: class nextflow.util.VersionNumber -- 0.31.0
+Feb-20 13:06:54.915 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: bbduk)
+Feb-20 13:06:54.921 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:54.921 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:54.921 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:54.921 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:54.922 [main] DEBUG nextflow.Session - >>> barrier register (process: fastqc_trimmed)
+Feb-20 13:06:54.923 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > fastqc_trimmed -- maxForks: 64
+Feb-20 13:06:54.926 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: fastqc_trimmed)
+Feb-20 13:06:54.928 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:54.928 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:54.929 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:54.929 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:54.930 [main] DEBUG nextflow.Session - >>> barrier register (process: gzip_trimmed)
+Feb-20 13:06:54.930 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > gzip_trimmed -- maxForks: 64
+Feb-20 13:06:54.932 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: gzip_trimmed)
+Feb-20 13:06:54.935 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:54.935 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:54.936 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:54.936 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:54.938 [main] DEBUG nextflow.Session - >>> barrier register (process: hisat2)
+Feb-20 13:06:54.939 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > hisat2 -- maxForks: 64
+Feb-20 13:06:54.943 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: hisat2)
+Feb-20 13:06:54.952 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:54.953 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:54.953 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:54.953 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:54.954 [main] DEBUG nextflow.Session - >>> barrier register (process: samtools)
+Feb-20 13:06:54.955 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > samtools -- maxForks: 64
+Feb-20 13:06:54.960 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: samtools)
+Feb-20 13:06:54.983 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:54.984 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:54.984 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:54.985 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:54.986 [main] DEBUG nextflow.Session - >>> barrier register (process: preseq)
+Feb-20 13:06:54.986 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > preseq -- maxForks: 64
+Feb-20 13:06:54.989 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: preseq)
+Feb-20 13:06:54.994 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:54.995 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:54.995 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:54.995 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:54.996 [main] DEBUG nextflow.Session - >>> barrier register (process: rseqc)
+Feb-20 13:06:54.997 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > rseqc -- maxForks: 64
+Feb-20 13:06:54.999 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: rseqc)
+Feb-20 13:06:55.002 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:55.003 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:55.003 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:55.003 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:55.004 [main] DEBUG nextflow.Session - >>> barrier register (process: pileup)
+Feb-20 13:06:55.004 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > pileup -- maxForks: 64
+Feb-20 13:06:55.006 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: pileup)
+Feb-20 13:06:55.016 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:55.016 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:55.017 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:55.017 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:55.018 [main] DEBUG nextflow.Session - >>> barrier register (process: bedgraphs)
+Feb-20 13:06:55.018 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > bedgraphs -- maxForks: 64
+Feb-20 13:06:55.024 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: bedgraphs)
+Feb-20 13:06:55.027 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:55.027 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:55.027 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:55.027 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:55.028 [main] DEBUG nextflow.Session - >>> barrier register (process: dreg_prep)
+Feb-20 13:06:55.028 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > dreg_prep -- maxForks: 64
+Feb-20 13:06:55.033 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: dreg_prep)
+Feb-20 13:06:55.037 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:55.037 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:55.037 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:55.038 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:55.038 [main] DEBUG nextflow.Session - >>> barrier register (process: normalized_bigwigs)
+Feb-20 13:06:55.039 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > normalized_bigwigs -- maxForks: 64
+Feb-20 13:06:55.045 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: normalized_bigwigs)
+Feb-20 13:06:55.046 [Task submitter] DEBUG nextflow.executor.GridTaskHandler - [SLURM] submitted process get_software_versions > jobId: 1877681; workDir: /Users/magr0763/ChIP-seq_NF_Workflow/conf/work/6a/e6eb6171ac522a3083109958e55f01
+Feb-20 13:06:55.048 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:55.049 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:55.050 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:55.050 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:55.052 [main] DEBUG nextflow.Session - >>> barrier register (process: igvtools)
+Feb-20 13:06:55.053 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > igvtools -- maxForks: 64
+Feb-20 13:06:55.053 [Task submitter] INFO  nextflow.Session - [6a/e6eb61] Submitted process > get_software_versions
+Feb-20 13:06:55.058 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: igvtools)
+Feb-20 13:06:55.074 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:55.074 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:55.074 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:55.075 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:55.076 [main] DEBUG nextflow.Session - >>> barrier register (process: multiQC)
+Feb-20 13:06:55.076 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > multiQC -- maxForks: 64
+Feb-20 13:06:55.080 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: multiQC)
+Feb-20 13:06:55.086 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:55.086 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:55.086 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:55.087 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:55.087 [main] DEBUG nextflow.Session - >>> barrier register (process: FStitch)
+Feb-20 13:06:55.088 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > FStitch -- maxForks: 64
+Feb-20 13:06:55.092 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: FStitch)
+Feb-20 13:06:55.097 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:55.097 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:55.097 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:55.098 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:55.099 [main] DEBUG nextflow.Session - >>> barrier register (process: tfit)
+Feb-20 13:06:55.099 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > tfit -- maxForks: 64
+Feb-20 13:06:55.102 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: tfit)
+Feb-20 13:06:55.106 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:55.106 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:55.106 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:55.106 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:55.107 [main] DEBUG nextflow.Session - >>> barrier register (process: prelimtfit)
+Feb-20 13:06:55.107 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > prelimtfit -- maxForks: 64
+Feb-20 13:06:55.110 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: prelimtfit)
+Feb-20 13:06:55.112 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: slurm
+Feb-20 13:06:55.113 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'slurm'
+Feb-20 13:06:55.113 [main] DEBUG nextflow.executor.Executor - Initializing executor: slurm
+Feb-20 13:06:55.113 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 13:06:55.114 [main] DEBUG nextflow.Session - >>> barrier register (process: DAStk)
+Feb-20 13:06:55.114 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > DAStk -- maxForks: 64
+Feb-20 13:06:55.116 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: DAStk)
+Feb-20 13:06:55.116 [main] DEBUG nextflow.script.ScriptRunner - > Await termination 
+Feb-20 13:06:55.117 [main] DEBUG nextflow.Session - Session await
+Feb-20 13:07:04.757 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[jobId: 1877681; id: 1; name: get_software_versions; status: COMPLETED; exit: 1; error: -; workDir: /Users/magr0763/ChIP-seq_NF_Workflow/conf/work/6a/e6eb6171ac522a3083109958e55f01 started: 1550693219745; exited: 2019-02-20T20:07:01.418201Z; ]
+Feb-20 13:07:04.824 [Actor Thread 1] DEBUG nextflow.Session - <<< barrier arrive (process: get_software_versions)
+Feb-20 13:07:04.825 [main] DEBUG nextflow.Session - Session await > all process finished
+Feb-20 13:07:04.873 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: slurm)
+Feb-20 13:07:04.873 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Feb-20 13:07:05.002 [main] INFO  nextflow.Nextflow - [NascentFlow] Sent summary e-mail to margaret.gruca@colorado.edu (sendmail)
+Feb-20 13:07:05.566 [main] INFO  nextflow.Nextflow - [NascentFlow] Pipeline Complete
+Feb-20 13:07:07.395 [main] DEBUG nextflow.trace.StatsObserver - Workflow completed > WorkflowStats[succeedCount=1; failedCount=0; ignoredCount=0; cachedCount=0; succeedDuration=1.7s; failedDuration=0ms; cachedDuration=0ms]
+Feb-20 13:07:07.395 [main] DEBUG nextflow.trace.TraceFileObserver - Flow completing -- flushing trace file
+Feb-20 13:07:07.430 [main] DEBUG nextflow.trace.ReportObserver - Flow completing -- rendering html report
+Feb-20 13:07:07.469 [main] DEBUG nextflow.trace.ReportObserver - Execution report summary data:
+  {"get_software_versions":{"cpu":{"mean":194.1,"min":194.1,"q1":194.1,"q2":194.1,"q3":194.1,"max":194.1,"minLabel":"get_software_versions","maxLabel":"get_software_versions","q1Label":"get_software_versions","q2Label":"get_software_versions","q3Label":"get_software_versions"},"mem":{"mean":115867648,"min":115867648,"q1":115867648,"q2":115867648,"q3":115867648,"max":115867648,"minLabel":"get_software_versions","maxLabel":"get_software_versions","q1Label":"get_software_versions","q2Label":"get_software_versions","q3Label":"get_software_versions"},"time":{"mean":1663,"min":1663,"q1":1663,"q2":1663,"q3":1663,"max":1663,"minLabel":"get_software_versions","maxLabel":"get_software_versions","q1Label":"get_software_versions","q2Label":"get_software_versions","q3Label":"get_software_versions"},"reads":{"mean":106496,"min":106496,"q1":106496,"q2":106496,"q3":106496,"max":106496,"minLabel":"get_software_versions","maxLabel":"get_software_versions","q1Label":"get_software_versions","q2Label":"get_software_versions","q3Label":"get_software_versions"},"writes":{"mean":81920,"min":81920,"q1":81920,"q2":81920,"q3":81920,"max":81920,"minLabel":"get_software_versions","maxLabel":"get_software_versions","q1Label":"get_software_versions","q2Label":"get_software_versions","q3Label":"get_software_versions"},"cpuUsage":{"mean":194.1,"min":194.1,"q1":194.1,"q2":194.1,"q3":194.1,"max":194.1,"minLabel":"get_software_versions","maxLabel":"get_software_versions","q1Label":"get_software_versions","q2Label":"get_software_versions","q3Label":"get_software_versions"},"memUsage":{"mean":1.35,"min":1.35,"q1":1.35,"q2":1.35,"q3":1.35,"max":1.35,"minLabel":"get_software_versions","maxLabel":"get_software_versions","q1Label":"get_software_versions","q2Label":"get_software_versions","q3Label":"get_software_versions"},"timeUsage":{"mean":0.01,"min":0.01,"q1":0.01,"q2":0.01,"q3":0.01,"max":0.01,"minLabel":"get_software_versions","maxLabel":"get_software_versions","q1Label":"get_software_versions","q2Label":"get_software_versions","q3Label":"get_software_versions"}}}
+Feb-20 13:07:08.702 [main] DEBUG nextflow.trace.TimelineObserver - Flow completing -- rendering html timeline
+Feb-20 13:07:09.231 [main] DEBUG nextflow.CacheDB - Closing CacheDB done
+Feb-20 13:07:09.240 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
