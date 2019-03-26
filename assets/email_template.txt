@@ -1,5 +1,5 @@
 ========================================
- ChIP_Flow v${version}
+ ChIP-Flow v${version}
 ========================================
 Run Name: $runName
 
