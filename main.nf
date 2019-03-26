@@ -176,7 +176,7 @@ else {
 
 // Header log info
 log.info """=======================================================
-NascentFlow v${params.version}"
+ChIP-Flow v${params.version}"
 ======================================================="""
 def summary = [:]
 summary['Pipeline Name']    = 'NascentFlow'
@@ -248,7 +248,6 @@ process get_software_versions {
     module load bedtools/2.25.0
     module load igvtools/2.3.75
     module load sra/2.9.2
-    module load seqkit/0.9.0
 
     echo $params.version > v_pipeline.txt
     echo $workflow.nextflow.version > v_nextflow.txt
@@ -258,7 +257,6 @@ process get_software_versions {
     samtools --version > v_samtools.txt
     fasterq-dump --version > v_fastq-dump.txt
     preseq --version > v_preseq.txt
-    seqkit version > v_seqkit.txt
     echo "2.0.3" > v_preseq.txt    
     bedtools --version > v_bedtools.txt
     /opt/igvtools/2.3.75/igvtools version > v_igv-tools.txt
