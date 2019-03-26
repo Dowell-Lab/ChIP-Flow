@@ -4,10 +4,10 @@
 Run Name: $runName
 
 <% if (success){
-    out << "## ChIP_Flow execution completed successfully! ##"
+    out << "## ChIP-Flow execution completed successfully! ##"
 } else {
     out << """####################################################
-## ChIP_Flow execution completed unsuccessfully! ##
+## ChIP-Flow execution completed unsuccessfully! ##
 ####################################################
 The exit status of the task that caused the workflow execution to fail was: $exitStatus.
 The full error message was:
@@ -19,7 +19,7 @@ ${errorReport}
 
 <% if (!success){
     out << """####################################################
-## ChIP_Flow execution completed unsuccessfully! ##
+## ChIP-Flow execution completed unsuccessfully! ##
 ####################################################
 The exit status of the task that caused the workflow execution to fail was: $exitStatus.
 The full error message was:
@@ -27,7 +27,7 @@ The full error message was:
 ${errorReport}
 """
 } else {
-    out << "## ChIP_Flow execution completed successfully! ##"
+    out << "## ChIP-Flow execution completed successfully! ##"
 }
 %>
 
@@ -48,4 +48,4 @@ Pipeline Configuration:
 
 --
 ChIP_Flow
-https://biof-git.colorado.edu/magr0763/ChIP-seq_NF_Workflow
+https://github.com/Dowell-Lab/ChIP-Flow
