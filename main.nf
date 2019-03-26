@@ -1,14 +1,13 @@
 #!/usr/bin/env nextflow
 /*
 ========================================================================================
-                         ChIP_Flow - ChIP-seq PIPELINE
+                         ChIP-Flow - ChIP-seq PIPELINE
 ========================================================================================
  ChIP-seq Analysis Pipeline. Started 2018-11-06.
  #### Homepage / Documentation
- https://fiji-viz.colorado.edu/jupyterhub/user/magr0763/tree/ChIP-seq_NF_Workflow
+https://github.com/Dowell-Lab/ChIP-Flow
  #### Authors
  Margaret Gruca <magr0763@colorado.edu>
- Ignacio Tripodi <ignacio.tripodi@colorado.edu>
 ========================================================================================
 ========================================================================================
 
@@ -47,7 +46,7 @@ Pipeline steps:
 def helpMessage() {
     log.info"""
     =========================================
-     ChIP_Flow v${params.version}
+     ChIP-Flow v${params.version}
     =========================================
     Usage:
 
@@ -896,9 +895,9 @@ process multiqc {
 workflow.onComplete {
 
     // Set up the e-mail variables
-    def subject = "[NascentFlow] Successful: $workflow.runName"
+    def subject = "[ChIP-Flow] Successful: $workflow.runName"
     if(!workflow.success){
-      subject = "[NascentFlow] FAILED: $workflow.runName"
+      subject = "[ChIP-Flow] FAILED: $workflow.runName"
     }
     def email_fields = [:]
     email_fields['version'] = params.version
@@ -946,11 +945,11 @@ workflow.onComplete {
           if( params.plaintext_email ){ throw GroovyException('Send plaintext e-mail, not HTML') }
           // Try to send HTML e-mail using sendmail
           [ 'sendmail', '-t' ].execute() << sendmail_html
-          log.info "[NascentFlow] Sent summary e-mail to $params.email (sendmail)"
+          log.info "[ChIP-Flow] Sent summary e-mail to $params.email (sendmail)"
         } catch (all) {
           // Catch failures and try with plaintext
           [ 'mail', '-s', subject, params.email ].execute() << email_txt
-          log.info "[NascentFlow] Sent summary e-mail to $params.email (mail)"
+          log.info "[ChIP-Flow] Sent summary e-mail to $params.email (mail)"
         }
     }
 
@@ -964,6 +963,6 @@ workflow.onComplete {
     def output_tf = new File( output_d, "pipeline_report.txt" )
     output_tf.withWriter { w -> w << email_txt }
 
-    log.info "[NascentFlow] Pipeline Complete"
+    log.info "[ChIP-Flow] Pipeline Complete"
 
 }
