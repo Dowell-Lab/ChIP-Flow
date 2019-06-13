@@ -70,6 +70,7 @@ def helpMessage() {
         --savefq                       Compresses and saves raw fastq reads.
         --saveTrim                     Compresses and saves trimmed fastq reads.
         --saveAll                      Compresses and saves all fastq reads.
+        --skipBAM                      Skip saving BAM files.
 
     QC Options:
         --skipMultiQC                  Skip running MultiQC report.
@@ -370,7 +371,6 @@ process bbduk {
     file "*.txt" into trim_stats
 
     script:
-//    prefix = fastq.baseName
     if (!params.singleEnd) {
         """
         module load bbmap/38.05
@@ -503,10 +503,15 @@ process samtools {
     tag "$name"
     memory '100 GB'
     cpus 16
-    publishDir "${params.outdir}/mapped/bams", mode: 'copy', pattern: "${name}.sorted.bam"
-    publishDir "${params.outdir}/mapped/bams", mode: 'copy', pattern: "${name}.sorted.bam.bai"
-    publishDir "${params.outdir}/qc/samtools_mapstats", mode: 'copy', pattern: "${name}.sorted.bam.flagstat"
-    publishDir "${params.outdir}/qc/samtools_mapstats", mode: 'copy', pattern: "${name}.sorted.bam.millionsmapped"
+    publishDir "${params.outdir}" , mode: 'copy',
+    saveAs: {filename ->
+             if ((filename.indexOf("sorted.bam") > 0) & !params.skipBAM)                                                                                                                             "mapped/bams/$filename"
+        else if ((filename.indexOf("sorted.bam.bai") > 0) & !params.skipBAM)                                                                                                                         "mapped/bams/$filename"
+        else if (filename.indexOf("flagstat") > 0)                    "qc/mapstats/$filename"
+        else if (filename.indexOf("millionsmapped") > 0)              "qc/mapstats/$filename"
+        else if (filename.indexOf("sorted.cram") > 0)                 "mapped/crams/$filename"
+        else if (filename.indexOf("sorted.cram.crai") > 0)            "mapped/crams/$filename"
+    }
 
     input:
     set val(name), file(mapped_sam) from hisat2_sam
@@ -514,31 +519,35 @@ process samtools {
     output:
     set val(name), file("${name}.sorted.bam") into sorted_bam_ch
     set val(name), file("${name}.sorted.bam.bai") into sorted_bam_indices_ch
-    set val(name), file("${name}.sorted.bam.flagstat") into bam_flagstat
-    set val(name), file("${name}.sorted.bam.millionsmapped") into bam_milmapped_bedgraph
+    set val(name), file("${name}.flagstat") into bam_flagstat
+    set val(name), file("${name}.millionsmapped") into bam_milmapped_bedgraph
+    set val(name), file("${name}.sorted.cram") into cram_out
+    set val(name), file("${name}.sorted.cram.crai") into cram_index_out
 
     script:
-// Note that the millionsmapped arugments below are only good for SE data. When PE is added, it will need to be changed to:
-    // -F 0x40 rootname.sorted.bam | cut -f1 | sort | uniq | wc -l  > rootname.bam.millionsmapped
     if (!params.singleEnd) {
     """
-    module load samtools/1.8
 
     samtools view -@ 16 -bS -o ${name}.bam ${mapped_sam}
     samtools sort -@ 16 ${name}.bam > ${name}.sorted.bam
-    samtools flagstat ${name}.sorted.bam > ${name}.sorted.bam.flagstat
-    samtools view -@ 16 -F 0x40 ${name}.sorted.bam | cut -f1 | sort | uniq | wc -l > ${name}.sorted.bam.millionsmapped
+    samtools flagstat ${name}.sorted.bam > ${name}.flagstat
+    samtools view -@ 16 -F 0x40 ${name}.sorted.bam | cut -f1 | sort | uniq | wc -l > ${name}.millionsmapped
     samtools index ${name}.sorted.bam ${name}.sorted.bam.bai
+    samtools view -@ 16 -C -T ${genome} -o ${name}.cram ${name}.sorted.bam
+    samtools sort -@ 16 -O cram ${name}.cram > ${name}.sorted.cram
+    samtools index -c ${name}.sorted.cram ${name}.sorted.cram.crai
     """
     } else {
     """
-    module load samtools/1.8
 
     samtools view -@ 16 -bS -o ${name}.bam ${mapped_sam}
     samtools sort -@ 16 ${name}.bam > ${name}.sorted.bam
-    samtools flagstat ${name}.sorted.bam > ${name}.sorted.bam.flagstat
-    samtools view -@ 16 -F 0x904 -c ${name}.sorted.bam > ${name}.sorted.bam.millionsmapped
+    samtools flagstat ${name}.sorted.bam > ${name}.flagstat
+    samtools view -@ 16 -F 0x904 -c ${name}.sorted.bam > ${name}.millionsmapped
     samtools index ${name}.sorted.bam ${name}.sorted.bam.bai
+    samtools view -@ 16 -C -T ${genome} -o ${name}.cram ${name}.sorted.bam
+    samtools sort -@ 16 -O cram ${name}.cram > ${name}.sorted.cram
+    samtools index -c ${name}.sorted.cram ${name}.sorted.cram.crai
     """
     }
 }
@@ -781,7 +790,7 @@ process multiqc {
     file ('qc/rseqc/*') from rseqc_results.collect()
     file ('qc/preseq/*') from preseq_results.collect()
     file ('software_versions/*') from software_versions_yaml
-    file ('qc/hisat2_mapstats*') from hisat2_mapstats.collect()
+    file ('qc/hisat2_mapstats/*') from hisat2_mapstats.collect()
 
     output:
     file "*multiqc_report.html" into multiqc_report
