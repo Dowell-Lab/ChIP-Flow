@@ -82,6 +82,7 @@ The best way to run Nextflow is using an sbatch script using the same command sp
 | --savefq   |               | Compresses and saves raw fastq reads.                     |
 | --saveTrim |               | Compresses and saves trimmed fastq reads.                 |
 | --saveAll  |               | Compresses and saves all fastq reads.                     |
+| --skipBAM  |               | Skip saving BAM files (CRAM saves by default).            |
 
 **Input File Options**
 
