@@ -677,8 +677,9 @@ process bedgraphs {
     tag "$name"
     memory '80 GB'
     time '4h'
-    publishDir "${params.outdir}/mapped/bedgraphs", mode: 'copy', pattern: "${name}.bedGraph"
-    publishDir "${params.outdir}/mapped/rcc_bedgraphs", mode: 'copy', pattern: "${name}.rcc.bedGraph"
+    if (params.savebg) {
+            publishDir "${params.outdir}/mapped/bedgraphs", mode: 'copy', pattern: "${name}.bedGraph"
+    }
 
     input:
     set val(name), file(bam_file) from sorted_bams_for_bedtools_bedgraph
@@ -724,6 +725,9 @@ process normalized_bigwigs {
     tag "$name"
     memory '30 GB'
     publishDir "${params.outdir}/mapped/rcc_bigwig", mode: 'copy'
+    
+    when:
+    params.savebw
 
     input:
     set val(name), file(bedgraph) from bedgraph_bigwig
