@@ -40,14 +40,6 @@ To see a full list of options and pipeline version, enter:
     
     $ nextflow run main.nf -profile fiji --help
 
-##### MultiQC Installation
-
-MultiQC will also run by default upon completion of all previous steps. However, in its current configuration, you must have installed MultiQC to your home directory by running:
-
-    $ pip3 install multiqc --user
-    
-Remember that python3 must be in your path (if you are a Fiji user, you must module load python/3.6.3). This will then install the current MutliQC v1.6. Future additions to the pipeline will include a singularity container for MultiQC to remove this prerequisite.
-
 ##### Parallel-fastq-dump Installation
 
 As of verison 0.4, we have implemented a wrapper for fastq-dump for multi-threading in place of fasterq-dump due to memory leak issues. This, however, requires the installation of parallel-fastq-dump to your user home. You can do so by running:
@@ -57,6 +49,10 @@ As of verison 0.4, we have implemented a wrapper for fastq-dump for multi-thread
 This will check for the sra-tools requirement, so if you do not want this installed to your user then this dependency must already be loaded to your path (i.e. module load sra/2.9.2).
 
 This has been added as an *option* and the pipeline will run fastq-dump (single core) by default. To run multi-threading on 8 cores, you must specify `--threadfqdump` as a nextflow run argument.
+
+##### Software Requirements
+
+Python3, RSeQC, preseq, Picard Tools, BEDTools, Samtools, HISAT2, BBMap Suite, MultiQC, SRA Tools, IGV Tools
 
 ##### Running Nextflow Using an sbatch script
 
@@ -85,6 +81,7 @@ The best way to run Nextflow is using an sbatch script using the same command sp
 | --skipBAM  |               | Skip saving BAM files (CRAM saves by default).            |
 | --savebw   |               | Save normalized BigWig files for UCSC genome broswer.     |
 | --savebg   |               | Saves concatenated pos/neg bedGraph file.                 |
+|--savedup   |               | Save deduplicated/marked duplicate BAM files (using picard, cannot be used with --skippicard). |
 
 **Input File Options**
 
@@ -102,5 +99,12 @@ The best way to run Nextflow is using an sbatch script using the same command sp
 
 | Arguments       | Usage       | Description                                             |
 |-----------------|-------------|---------------------------------------------------------|
-| --skipMultiQC   |             | Skip running MultiQC report.                            |
+| --skipMultiQC   |             | Skip running MultiQC.                                   |
+| --skipRSeQC     |             | Skip running RSeQC.                                     |
+| --skippreseq    |             | Skip running preseq.                                    |
+| --skipFastQC    |             | Skip running FastQC                                     |
+| --skippileup    |             | Skip running pileup.                                    |
+| --skipAllQC     |             | Skip running all QC (does not include mapstats).        |
+| --noTrim        |             | Skip trimming and only run mapping.                     |
+| --dedup         |             | Remove sequencing duplicates from BAM files (using picard, cannot be used with --skippicard).        |
 
