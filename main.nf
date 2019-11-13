@@ -193,7 +193,7 @@ log.info """=======================================================
 ChIP-Flow v${params.version}"
 ======================================================="""
 def summary = [:]
-summary['Pipeline Name']    = 'NascentFlow'
+summary['Pipeline Name']    = 'ChIPFlow'
 summary['Help Message']     = params.help
 summary['Pipeline Version'] = params.version
 summary['Run Name']         = custom_runName ?: workflow.runName
@@ -635,6 +635,7 @@ process picard {
         else if (filename.indexOf("gc_bias_metrics.txt") > 0)                                      "qc/picard/gc_bias/$filename"
         else if (filename.indexOf("summary_metrics.txt") > 0)                                      "qc/picard/gc_bias/$filename"
         else if ((filename.indexOf("bam") > 0) && (params.savedup))                                "mapped/picard_dedup/$filename"
+        else if ((filename.indexOf("bam.bai") > 0) && (params.savedup))                            "mapped/picard_dedup/$filename"            
         else null            
     }
     
@@ -673,6 +674,7 @@ process picard {
          M=${name}.marked_dup_metrics.txt
     samtools sort -@ 16 ${name}.dedup_unsorted.bam > ${name}.dedup.bam
     rm ${name}.dedup_unsorted.bam
+    samtools index ${name}.dedup.bam ${name}.dedup.bam.bai
          
     java -jar -Xmx20g ${params.picard_path} CollectGcBiasMetrics \
           I=${bam_file} \
