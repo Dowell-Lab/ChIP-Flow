@@ -414,7 +414,7 @@ process bbduk_hisat2 {
                   out=${prefix_pe}_1.trim.fastq.gz \
                   out2=${prefix_pe}_2.trim.fastq.gz \
                   ref=${bbmap_adapters} \
-                  ktrim=r qtrim=10 k=23 mink=11 hdist=1 \
+                  ktrim=r qtrim=r trimq=10 k=23 mink=11 hdist=1 \
                   maq=10 minlen=20 \
                   tpe tbo \
                   stats=${prefix_pe}.trimstats.txt \
@@ -440,7 +440,7 @@ process bbduk_hisat2 {
                   in=${reads} \
                   out=${prefix_se}.trim.fastq.gz \
                   ref=${bbmap_adapters} \
-                  ktrim=r qtrim=10 k=23 mink=11 hdist=1 \
+                  ktrim=r qtrim=r trimq=10 k=23 mink=11 hdist=1 \
                   maq=10 minlen=20 \
                   stats=${prefix_se}.trimstats.txt \
                   refstats=${prefix_se}.refstats.txt
@@ -586,19 +586,6 @@ process samtools {
     set val(name), file("${name}.sorted.cram.crai") into cram_index_out
 
     script:
-    if (!params.singleEnd) {
-    """
-
-    samtools view -@ 16 -bS -o ${name}.bam ${mapped_sam}
-    samtools sort -@ 16 ${name}.bam > ${name}.sorted.bam
-    samtools flagstat ${name}.sorted.bam > ${name}.flagstat
-    samtools view -@ 16 -F 0x40 ${name}.sorted.bam | cut -f1 | sort | uniq | wc -l > ${name}.millionsmapped
-    samtools index ${name}.sorted.bam ${name}.sorted.bam.bai
-    samtools view -@ 16 -C -T ${genome} -o ${name}.cram ${name}.sorted.bam
-    samtools sort -@ 16 -O cram ${name}.cram > ${name}.sorted.cram
-    samtools index -c ${name}.sorted.cram ${name}.sorted.cram.crai
-    """
-    } else {
     """
 
     samtools view -@ 16 -bS -o ${name}.bam ${mapped_sam}
@@ -610,7 +597,6 @@ process samtools {
     samtools sort -@ 16 -O cram ${name}.cram > ${name}.sorted.cram
     samtools index -c ${name}.sorted.cram ${name}.sorted.cram.crai
     """
-    }
 }
 
 sorted_bam_ch
