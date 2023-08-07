@@ -300,15 +300,15 @@ process sra_dump {
     set val(prefix), file(reads) from read_files_sra
 
     output:
-    set val(prefix), file("*.fastq.gz") into fastq_reads_qc_sra, fastq_reads_trim_sra, fastq_reads_hisat2_notrim_sra
+    tuple val(prefix), file("*.fastq.gz") into fastq_reads_qc_sra, fastq_reads_trim_sra, fastq_reads_hisat2_notrim_sra
    
 
     script:
     prefix = reads.baseName
-    if (!params.threadfqdump) {
+    if (!params.threadfqdump && !params.singleEnd) {
         """
         echo ${prefix}
-        fastq-dump ${reads} --gzip
+        fastq-dump --split-3 ${reads} --gzip
         """
     } else if (!params.singleEnd) {
          """
@@ -319,10 +319,10 @@ process sra_dump {
             --split-3 \
             --sra-id ${reads}
         """
-    } else if (!params.threadfqdump && !params.singleEnd) {
+    } else if (!params.threadfqdump) {
         """
         echo ${prefix}
-        fastq-dump --split-3 ${reads} --gzip
+        fastq-dump ${reads} --gzip
         """
     } else {
         """
@@ -354,21 +354,38 @@ process fastQC {
     !params.skipFastQC && !params.skipAllQC
 
     input:
-    set val(prefix), file(reads) from fastq_reads_qc.mix(fastq_reads_qc_sra)
+    tuple val(prefix), path(reads) from fastq_reads_qc.mix(fastq_reads_qc_sra)
 
     output:
     file "*.{zip,html}" into fastqc_results
     file "*.fastqc_stats.txt" into fastqc_stats
 
     script:
+    def reads_1 = ''
+    def reads_2 = ''
+    if (params.singleEnd) {
+        reads_1 = reads.first()
+    } else {
+        reads_1 = reads.first()
+        reads_2 = reads.last()
+    }
     """
     echo ${prefix}
-    fastqc $reads
+    fastqc ${reads_1}
     
     ${params.extract_fastqc_stats} \
-        --srr=${prefix} \
-        > ${prefix}.fastqc_stats.txt    
+        --srr=${prefix}_1 \
+        > ${prefix}_1.fastqc_stats.txt    
     """
+    if (!params.singleEnd) {
+    """
+    fastqc ${reads_2}
+
+    ${params.extract_fastqc_stats} \
+        --srr=${prefix}_2 \
+        > ${prefix}_2.fastqc_stats.txt
+    """
+    }
 }
 
 /*
