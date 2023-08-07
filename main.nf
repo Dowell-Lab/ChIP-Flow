@@ -170,7 +170,7 @@ if (params.fastqs) {
                             .map { file -> tuple(file.simpleName, file) }
     } else {
         Channel
-            .fromFilePairs( params.fastqs, size: params.singleEnd ? 1 : 2 )
+            .fromFilePairs( params.fastqs, size: 2 )
             .ifEmpty { exit 1, "Cannot find any reads matching: ${params.reads}\nNB: Path needs to be enclosed in quotes!\nIf this is single-end data, please specify --singleEnd on the command line." }
             .into { fastq_reads_qc; fastq_reads_trim; fastq_reads_hisat2_notrim }
     }
@@ -363,27 +363,40 @@ process fastQC {
     script:
     def reads_1 = ''
     def reads_2 = ''
+    def prefix_1 = ''
+    def prefix_2 = ''
     if (params.singleEnd) {
         reads_1 = reads.first()
+        prefix_1 = reads_1.simpleName
     } else {
         reads_1 = reads.first()
         reads_2 = reads.last()
+        prefix_1 = reads_1.simpleName
+        prefix_2 = reads_2.simpleName
     }
+    if (params.singleEnd) {
     """
-    echo ${prefix}
+    echo ${prefix_1}
     fastqc ${reads_1}
     
     ${params.extract_fastqc_stats} \
-        --srr=${prefix}_1 \
-        > ${prefix}_1.fastqc_stats.txt    
+        --srr=${prefix_1} \
+        > ${prefix_1}.fastqc_stats.txt
     """
-    if (!params.singleEnd) {
+    } else {
     """
+    echo ${prefix_1} ${prefix_2}
+    fastqc ${reads_1}
+
+    ${params.extract_fastqc_stats} \
+        --srr=${prefix_1} \
+        > ${prefix_1}.fastqc_stats.txt
+
     fastqc ${reads_2}
 
     ${params.extract_fastqc_stats} \
-        --srr=${prefix}_2 \
-        > ${prefix}_2.fastqc_stats.txt
+        --srr=${prefix_2} \
+        > ${prefix_2}.fastqc_stats.txt
     """
     }
 }
